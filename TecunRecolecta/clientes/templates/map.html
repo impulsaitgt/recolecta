@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Ubicación</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ubicación Geográfica de {{ cliente.nombre_completo }}</h1>
+    <h2>Coordenadas</h2>
+    <label for="lat">Latitude:</label>
+    <input type="text" id="lat" name="latitude dinamica">
+    <p></p>
+    <label for="lon">Longitud:</label>
+    <input type="text" id="lon" name="longitude dinamica">
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        const clienteId = {{ cliente.id }};  // ID del cliente
+
+        function sendLocation(latitude, longitude) {
+            fetch('/clientes/save-location/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Asegúrate de incluir el token CSRF
+                },
+                body: JSON.stringify({ cliente_id: clienteId, lat: latitude, lon: longitude })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                document.getElementById("lat").value = latitude
+                const longitude = position.coords.longitude;
+                document.getElementById("lon").value = longitude
+
+                // Muestra la ubicación en el mapa
+                var map = L.map('map').setView([latitude, longitude], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup('Tu ubicación actual').openPopup();
+
+                // Envía la ubicación al servidor
+                sendLocation(latitude, longitude);
+            });
+        } else {
+            alert('Geolocalización no es soportada por este navegador.');
+        }
+    </script>
+</body>
+</html>
