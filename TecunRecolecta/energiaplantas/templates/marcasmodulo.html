@@ -21,31 +21,29 @@
                 <div class="d-flex align-items-center">
                     <img src="{% static 'images/tecun.jpg' %}" alt="Tecun" class="img-fluid"
                          style="max-width: 50px; margin-right: 10px;">
-                    <h4>Marcas Controlador</h4>
+                    <h4>Marcas Modulo</h4>
                 </div>
-                <a href="{% url 'index' %}">Regresar</a>
+                <a href="{% url 'indexep' %}">Regresar</a>
             </div>
 
-            <form action="{% url 'newmc' %}" method="POST" class="card card-body">
+            <form action="{% url 'newmmo' %}" method="POST" class="card card-body">
                 {% csrf_token %}
 
-                <label for="descripcion">Marca Controlador:</label>
-                <input type="text" name="descripcion" placeholder="Descripcion Marca Controlador"
-                       class="form-control mb-2">
-                <button class="btn btn-success">Guardar</button>
-            </form>
-            {% for mcontrolador in mcontroladors %}
+                <label for="descripcion">Marca Modulo:</label>
+                <input type="text" name="descripcion" placeholder="Descripcion Marca Modulo" class="form-control mb-2">
+                <button class="btn btn-success">Guardar</button></form>
+            {% for mmodulo in mmodulos %}
             <div class="card card-body text-black mt-2 d-flex flex-row justify-content-between">
                 <div>
-                    <h4>{{mcontrolador.descripcion}}</h4>
+                    <h4>{{mmodulo.descripcion}}</h4>
                 </div>
-                <form action="{% url 'delmc' mcontrolador.id %}" method="POST">
+                <form action="{% url 'delmmo' mmodulo.id %}" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-danger btn-sm">Borrar</button>
                 </form>
             </div>
             {% empty %}
-            <h1 class="display-4 text-center">No ha registrado Marcas de Controlador</h1>
+            <h1 class="display-4 text-center">No ha registrado Marcas de Modulo</h1>
             {% endfor %}
 
             {% else %}

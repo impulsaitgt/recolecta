@@ -17,26 +17,34 @@
     <div class="row">
         <div class="col-md-4 offset-md-4">
             {% if user.is_authenticated %}
-            <h2> Bienvenido, {{user.username}}</h2>
             <div class="d-flex justify-content-center align-items-center">
                 <img src="{% static 'images/tecun.jpg' %}" alt="Tecun" class="img-fluid"
                      style="max-width: 50px; margin-right: 10px;">
-                <h1 class="display-6 fw-bold">Tecun Recolecta</h1>
+                <h5 class="fw-bold">Proyecto Energia y Plantas  </h5>
+                <a href="{% url 'index' %}" style="margin-left: 10px;">Regresar</a>
             </div>
-
-
-            <form action="{% url 'clientes' %}" method="POST" class="card card-body">
+            <form action="{% url 'cliugep' %}" method="POST" class="card card-body">
                 {% csrf_token %}
-                <button class="btn btn-success">Clientes</button>
+                <button class="btn btn-success">Ubicacion de Clientes y Equipos</button>
+            </form>            <form action="{% url 'marcasmotor' %}" method="POST" class="card card-body">
+                {% csrf_token %}
+                <button class="btn btn-primary">Marcas Motor</button>
             </form>
-            <form action="{% url 'indexep' %}" method="POST" class="card card-body">
+            <form action="{% url 'marcasgenerador' %}" method="POST" class="card card-body">
                 {% csrf_token %}
-                <button class="btn btn-primary">Proyecto Energia y Plantas</button>
+                <button class="btn btn-primary">Marcas Generador</button>
             </form>
-
-            <form action="{% url 'logout' %}" method="POST" class="card card-body">
+            <form action="{% url 'marcasmodulo' %}" method="POST" class="card card-body">
                 {% csrf_token %}
-                <button class="btn btn-danger">Cerrar Sesion</button>
+                <button class="btn btn-primary">Marcas Modulo</button>
+            </form>
+            <form action="{% url 'marcascontrolador' %}" method="POST" class="card card-body">
+                {% csrf_token %}
+                <button class="btn btn-primary">Marcas Controlador</button>
+            </form>
+            <form action="{% url 'uso' %}" method="POST" class="card card-body">
+                {% csrf_token %}
+                <button class="btn btn-primary">Usos de Equipos</button>
             </form>
             {% else %}
             <h2> No esta autenticado </h2>

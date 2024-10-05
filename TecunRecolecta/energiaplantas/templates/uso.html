@@ -21,29 +21,29 @@
                 <div class="d-flex align-items-center">
                     <img src="{% static 'images/tecun.jpg' %}" alt="Tecun" class="img-fluid"
                          style="max-width: 50px; margin-right: 10px;">
-                    <h4>Marcas Motor</h4>
+                    <h4>Usos de Equipos</h4>
                 </div>
-                <a href="{% url 'index' %}">Regresar</a>
+                <a href="{% url 'indexep' %}">Regresar</a>
             </div>
 
-            <form action="{% url 'newmm' %}" method="POST" class="card card-body">
+            <form action="{% url 'newu' %}" method="POST" class="card card-body">
                 {% csrf_token %}
 
-                <label for="descripcion">Marca Motor:</label>
-                <input type="text" name="descripcion" placeholder="Descripcion Marca Motor" class="form-control mb-2">
+                <label for="descripcion">Uso Equipo:</label>
+                <input type="text" name="descripcion" placeholder="Descripcion Uso Equipo" class="form-control mb-2">
                 <button class="btn btn-success">Guardar</button></form>
-            {% for mmotor in mmotors %}
+            {% for uso in usos %}
             <div class="card card-body text-black mt-2 d-flex flex-row justify-content-between">
                 <div>
-                    <h4>{{mmotor.descripcion}}</h4>
+                    <h4>{{uso.descripcion}}</h4>
                 </div>
-                <form action="{% url 'delmm' mmotor.id %}" method="POST">
+                <form action="{% url 'delu' uso.id %}" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-danger btn-sm">Borrar</button>
                 </form>
             </div>
             {% empty %}
-            <h1 class="display-4 text-center">No ha registrado Marcas Motor</h1>
+            <h1 class="display-4 text-center">No ha registrado Usos de Equipos</h1>
             {% endfor %}
 
             {% else %}
