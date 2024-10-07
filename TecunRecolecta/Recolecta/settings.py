@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-bdxqp@+4qnitg3s#z7j#-^%v3c7=uh=!bth8v8rup(40)%9)d+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['procitcluster.com', '3.101.143.28', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www.procitcluster.com','procitcluster.com', '3.101.143.28', 'localhost', '127.0.0.1']
 
 
 # Application definition

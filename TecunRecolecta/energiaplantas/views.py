@@ -14,7 +14,7 @@ def marcasmotor(request):
     return render(request, 'marcasmotor.html', {"mmotors": mmotors})
 
 def create_mmotor(request):
-    mmotor = MarcaMotor(descripcion=request.POST['descripcion'])
+    mmotor = MarcaMotor(descripcion=request.POST['descripcion'],usuario=request.user.username)
     mmotor.save()
     return redirect('marcasmotor')
 
@@ -28,7 +28,7 @@ def marcasgenerador(request):
     return render(request, 'marcasgenerador.html', {"mgeneradors": mgeneradors})
 
 def create_mgenerador(request):
-    mgenerador = MarcaGenerador(descripcion=request.POST['descripcion'])
+    mgenerador = MarcaGenerador(descripcion=request.POST['descripcion'],usuario=request.user.username)
     mgenerador.save()
     return redirect('marcasgenerador')
 
@@ -42,7 +42,7 @@ def marcasmodulo(request):
     return render(request, 'marcasmodulo.html', {"mmodulos": mmodulos})
 
 def create_mmodulo(request):
-    mmodulo = MarcaModulo(descripcion=request.POST['descripcion'])
+    mmodulo = MarcaModulo(descripcion=request.POST['descripcion'],usuario=request.user.username)
     mmodulo.save()
     return redirect('marcasmodulo')
 
@@ -57,7 +57,7 @@ def marcascontrolador(request):
     return render(request, 'marcascontrolador.html', {"mcontroladors": mcontroladors})
 
 def create_mcontrolador(request):
-    mcontrolador = MarcaControlador(descripcion=request.POST['descripcion'])
+    mcontrolador = MarcaControlador(descripcion=request.POST['descripcion'],usuario=request.user.username)
     mcontrolador.save()
     return redirect('marcascontrolador')
 
@@ -71,7 +71,7 @@ def uso(request):
     return render(request, 'uso.html', {"usos": usos})
 
 def create_uso(request):
-    uso = Uso(descripcion=request.POST['descripcion'])
+    uso = Uso(descripcion=request.POST['descripcion'],usuario=request.user.username)
     uso.save()
     return redirect('uso')
 
@@ -92,6 +92,7 @@ def actualiza_ubicacion_cliente(request):
         cliente = Cliente.objects.get(id=cliente_id)
         cliente.latitude = request.POST['lat']
         cliente.longitude = request.POST['lon']
+        cliente.usuario = request.user.username
         cliente.save()
     return redirect('equiposep', cliente_id = cliente_id)
 
@@ -126,7 +127,8 @@ def create_equipo(request):
                         marcamotor_id=request.POST['mmotor'],
                         marcagenerador_id=request.POST['mgenerador'],
                         marcamodulo_id=request.POST['mmodulo'],
-                        marcacontrolador_id=request.POST['mcontrolador'])
+                        marcacontrolador_id=request.POST['mcontrolador'],
+                        usuario=request.user.username)
     else:
         equipo = Equipo(cliente_id=request.POST['cliente_id'],
                         descripcion=request.POST['descripcion'],
@@ -137,7 +139,8 @@ def create_equipo(request):
                         marcamotor_id=request.POST['mmotor'],
                         marcagenerador_id=request.POST['mgenerador'],
                         marcamodulo_id=request.POST['mmodulo'],
-                        marcacontrolador_id=request.POST['mcontrolador'])
+                        marcacontrolador_id=request.POST['mcontrolador'],
+                        usuario=request.user.username)
 
     equipo.save()
     return redirect('equiposep', cliente_id)

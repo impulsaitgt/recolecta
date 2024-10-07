@@ -5,30 +5,40 @@ from clientes.models import Cliente
 
 class MarcaMotor(models.Model):
     descripcion = models.CharField(max_length=100)
+    usuario = models.CharField(max_length=100, null=True)
+
 
     def __str__(self):
         return self.descripcion
 
 class MarcaGenerador(models.Model):
     descripcion = models.CharField(max_length=100)
+    usuario = models.CharField(max_length=100, null=True)
+
 
     def __str__(self):
         return self.descripcion
 
 class MarcaModulo(models.Model):
     descripcion = models.CharField(max_length=100)
+    usuario = models.CharField(max_length=100, null=True)
+
 
     def __str__(self):
         return self.descripcion
 
 class MarcaControlador(models.Model):
     descripcion = models.CharField(max_length=100)
+    usuario = models.CharField(max_length=100, null=True)
+
 
     def __str__(self):
         return self.descripcion
 
 class Uso(models.Model):
     descripcion = models.CharField(max_length=100)
+    usuario = models.CharField(max_length=100, null=True)
+
 
     def __str__(self):
         return self.descripcion
@@ -46,6 +56,8 @@ class Equipo(models.Model):
     marcagenerador = models.ForeignKey(MarcaGenerador, on_delete=models.PROTECT)
     marcamodulo = models.ForeignKey(MarcaModulo, on_delete=models.PROTECT)
     marcacontrolador = models.ForeignKey(MarcaControlador, on_delete=models.PROTECT)
+    usuario = models.CharField(max_length=100, null=True)
+
 
     def __str__(self):
         return self.descripcion

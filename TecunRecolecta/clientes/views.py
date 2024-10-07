@@ -37,10 +37,12 @@ def create_cliente(request):
     grabarubi = request.POST.get('grabarubi')
     if grabarubi:
         cliente = Cliente(nombre_completo=request.POST['nombre_completo'],
+                          usuario=request.user.username,
                           latitude=request.POST['lat'],
                           longitude=request.POST['lon'])
     else:
-        cliente = Cliente(nombre_completo=request.POST['nombre_completo'])
+        cliente = Cliente(nombre_completo=request.POST['nombre_completo'],
+                          usuario=request.user.username)
     cliente.save()
     return redirect('clientes')
 
