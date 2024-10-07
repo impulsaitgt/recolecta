@@ -6,6 +6,7 @@ class Cliente(models.Model):
     nombre_completo = models.CharField(null=False)
     latitude = models.FloatField(null=True, blank=True)  # Campo para latitud
     longitude = models.FloatField(null=True, blank=True)  # Campo para longitud
+    usuario = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.nombre_completo
