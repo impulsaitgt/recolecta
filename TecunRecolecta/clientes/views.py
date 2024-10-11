@@ -1,4 +1,5 @@
 import json
+from django.contrib import messages
 from django.shortcuts import redirect, render
 from .models import Cliente
 from django.http import JsonResponse
@@ -35,6 +36,7 @@ def clientes(request):
 
 def create_cliente(request):
     grabarubi = request.POST.get('grabarubi')
+
     if grabarubi:
         cliente = Cliente(nombre_completo=request.POST['nombre_completo'],
                           usuario=request.user.username,
