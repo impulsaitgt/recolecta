@@ -1,5 +1,4 @@
 import json
-from django.contrib import messages
 from django.shortcuts import redirect, render
 from .models import Cliente
 from django.http import JsonResponse
